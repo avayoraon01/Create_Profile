@@ -12,9 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -34,6 +31,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -146,7 +144,7 @@ fun Profiles() {
             TextField(
                 value = phone,
                 onValueChange = {
-                    if (it.length <= 10 && it.all { char -> char.isDigit() }) {
+                    if (it.length <= 10 &&it.all { char -> char.isDigit() }) {
                         phone = it
                     }
                 },
@@ -194,9 +192,10 @@ fun Profiles() {
                 trailingIcon = {
                     IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
                         Icon(
-                            imageVector = if (passwordVisibility) Icons.Filled.Lock else Icons.Default.Check,
+                           painter = painterResource(if (passwordVisibility) R.drawable.visibilityoff else R.drawable.design_ic_visibility),
                             contentDescription = if (passwordVisibility) "Hide password" else "Show password"
                         )
+
                     }
                 }
 
@@ -221,7 +220,16 @@ fun Profiles() {
                 ),
                 maxLines = 1,
                 singleLine = true,
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                        trailingIcon = {
+                    IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                        Icon(
+                            painter = painterResource(if (passwordVisibility) R.drawable.visibilityoff else R.drawable.design_ic_visibility),
+                            contentDescription = if (passwordVisibility) "Hide password" else "Show password"
+                        )
+
+                    }
+                }
 
 
             )
