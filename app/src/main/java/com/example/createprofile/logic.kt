@@ -33,11 +33,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profiles() {
+fun Profiles(navController: NavController) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -212,7 +213,6 @@ fun Profiles() {
                     }
                 }
 
-
             )
 
             TextField(
@@ -238,9 +238,13 @@ fun Profiles() {
                     scope.launch {
                         snackbarHostState.showSnackbar("Account created successfully")
                     }
+                    navController.navigate(route =Screen.Dashboard.route)
+
                 })
             {
-                Text(text = "Create Account")
+                Text(text = "Create Account",
+                )
+
             }
         }
     }
