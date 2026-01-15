@@ -22,7 +22,7 @@ fun SetupNavGraph(
        composable(
            route = Screen.Dashboard.route
        ){
-            Dashboard(navController = navController)
+            Dashboard()
        }
    }
 }
